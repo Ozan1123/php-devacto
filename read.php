@@ -1,14 +1,15 @@
-<?php 
+<?php
 include "koneksi.php";
-
-// Data yang akan diupdate
-$id = 1;
-$newEmail = "Adityamewing@gmail.com";
-// Query UPDATE
-$sql = "UPDATE users SET email='$newEmail' WHERE id=$id";
-if (mysqli_query($conn, $sql)) {
-echo "Data berhasil diupdate";
+// Query SELECT
+$sql = "SELECT id, nama, email FROM users";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+// Output data setiap baris
+while($row = mysqli_fetch_assoc($result)) {
+echo "ID: " . $row["id"]. " - Nama: " . $row["nama"]. " - Email:
+" . $row["email"]. "<br>";
+}
 } else {
-echo "Error updating record: " . mysqli_error($conn);
+echo "0 hasil";
 }
 ?>
